@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-13 10:58:39 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="hibernate.RouTrade" table="rou_trade" catalog="db_15">
+        <composite-id name="id" class="hibernate.RouTradeId">
+            <key-property name="tradeUserId" type="int">
+                <column name="trade_user_id" />
+            </key-property>
+            <key-property name="tradeRouId" type="int">
+                <column name="trade_rou_id" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="user" class="hibernate.User" update="false" insert="false" fetch="select">
+            <column name="trade_user_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="route" class="hibernate.Route" update="false" insert="false" fetch="select">
+            <column name="trade_rou_id" not-null="true" />
+        </many-to-one>
+        <property name="rouTradeTime" type="date">
+            <column name="rou_trade_time" length="10" />
+        </property>
+        <property name="rouTradeStatus" type="java.lang.Character">
+            <column name="rou_trade_status" length="1" />
+        </property>
+        <property name="rouComment" type="string">
+            <column name="rou_comment" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

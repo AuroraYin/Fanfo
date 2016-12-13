@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-13 10:58:39 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="hibernate.Route" table="route" catalog="db_15">
+        <id name="rouId" type="java.lang.Integer">
+            <column name="rou_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="hibernate.User" fetch="select">
+            <column name="rou_user_id" />
+        </many-to-one>
+        <property name="rouTitle" type="string">
+            <column name="rou_title" length="30" />
+        </property>
+        <property name="rouTitlePic" type="string">
+            <column name="rou_title_pic" length="100" />
+        </property>
+        <property name="rouContent" type="string">
+            <column name="rou_content" length="65535" />
+        </property>
+        <property name="rouAddrProvince" type="string">
+            <column name="rou_addr_province" length="20" />
+        </property>
+        <property name="rouAddrCity" type="string">
+            <column name="rou_addr_city" length="20" />
+        </property>
+        <property name="rouPrice" type="java.lang.Integer">
+            <column name="rou_price" />
+        </property>
+        <property name="rouPostTime" type="date">
+            <column name="rou_post_time" length="10" />
+        </property>
+        <property name="rouStatus" type="java.lang.Character">
+            <column name="rou_status" length="1" />
+        </property>
+        <set name="rouTrades" inverse="true">
+            <key>
+                <column name="trade_rou_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.RouTrade" />
+        </set>
+    </class>
+</hibernate-mapping>

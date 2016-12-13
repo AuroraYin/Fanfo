@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-13 10:58:39 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="hibernate.Report" table="report" catalog="db_15">
+        <composite-id name="id" class="hibernate.ReportId">
+            <key-property name="repUserId" type="int">
+                <column name="rep_user_id" />
+            </key-property>
+            <key-property name="repArtId" type="int">
+                <column name="rep_art_id" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="article" class="hibernate.Article" update="false" insert="false" fetch="select">
+            <column name="rep_art_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="hibernate.User" update="false" insert="false" fetch="select">
+            <column name="rep_user_id" not-null="true" />
+        </many-to-one>
+        <property name="repTime" type="date">
+            <column name="rep_time" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

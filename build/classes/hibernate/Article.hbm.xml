@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-13 10:58:39 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="hibernate.Article" table="article" catalog="db_15">
+        <id name="artId" type="java.lang.Integer">
+            <column name="art_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="hibernate.User" fetch="select">
+            <column name="art_user_id" />
+        </many-to-one>
+        <property name="artTitle" type="string">
+            <column name="art_title" length="30" />
+        </property>
+        <property name="artTitlePic" type="string">
+            <column name="art_title_pic" length="100" />
+        </property>
+        <property name="artContent" type="string">
+            <column name="art_content" length="65535" />
+        </property>
+        <property name="artAddrProvince" type="string">
+            <column name="art_addr_province" length="20" />
+        </property>
+        <property name="artAddrCity" type="string">
+            <column name="art_addr_city" length="20" />
+        </property>
+        <property name="artLikesNum" type="java.lang.Integer">
+            <column name="art_likes_num" />
+        </property>
+        <property name="artReadNum" type="java.lang.Integer">
+            <column name="art_read_num" />
+        </property>
+        <property name="artPostTime" type="date">
+            <column name="art_post_time" length="10" />
+        </property>
+        <set name="artComments" inverse="true">
+            <key>
+                <column name="com_art_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.ArtComment" />
+        </set>
+        <set name="users" inverse="false" table="art_like">
+            <key>
+                <column name="like_art_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="hibernate.User">
+                <column name="liker_id" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="reports" inverse="true">
+            <key>
+                <column name="rep_art_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.Report" />
+        </set>
+        <set name="restaurants" inverse="false" table="refer">
+            <key>
+                <column name="refer_art_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="hibernate.Restaurant">
+                <column name="refer_res_id" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

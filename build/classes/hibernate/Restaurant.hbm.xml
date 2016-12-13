@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-13 10:58:39 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="hibernate.Restaurant" table="restaurant" catalog="db_15">
+        <id name="resId" type="java.lang.Integer">
+            <column name="res_id" />
+            <generator class="identity" />
+        </id>
+        <property name="resName" type="string">
+            <column name="res_name" length="20" />
+        </property>
+        <property name="resAddrProvince" type="string">
+            <column name="res_addr_province" length="20" />
+        </property>
+        <property name="resAddrCity" type="string">
+            <column name="res_addr_city" length="20" />
+        </property>
+        <property name="resAddrStreet" type="string">
+            <column name="res_addr_street" length="50" />
+        </property>
+        <property name="resStyle" type="string">
+            <column name="res_style" length="20" />
+        </property>
+        <property name="resAverageCost" type="java.lang.Integer">
+            <column name="res_average_cost" />
+        </property>
+        <property name="resScore" type="java.lang.Double">
+            <column name="res_score" precision="22" scale="0" />
+        </property>
+        <property name="resPic" type="string">
+            <column name="res_pic" length="100" />
+        </property>
+        <set name="resMarks" inverse="true">
+            <key>
+                <column name="mres_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.ResMark" />
+        </set>
+        <set name="articles" inverse="false" table="refer">
+            <key>
+                <column name="refer_res_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="hibernate.Article">
+                <column name="refer_art_id" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="users" inverse="false" table="res_collect">
+            <key>
+                <column name="cres_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="hibernate.User">
+                <column name="collector_id" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

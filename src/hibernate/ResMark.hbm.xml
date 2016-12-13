@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-13 10:58:39 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="hibernate.ResMark" table="res_mark" catalog="db_15">
+        <composite-id name="id" class="hibernate.ResMarkId">
+            <key-property name="mresId" type="int">
+                <column name="mres_id" />
+            </key-property>
+            <key-property name="markerId" type="int">
+                <column name="marker_id" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="user" class="hibernate.User" update="false" insert="false" fetch="select">
+            <column name="marker_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="restaurant" class="hibernate.Restaurant" update="false" insert="false" fetch="select">
+            <column name="mres_id" not-null="true" />
+        </many-to-one>
+        <property name="resMarkTime" type="date">
+            <column name="res_mark_time" length="10" />
+        </property>
+        <property name="resMark" type="java.lang.Integer">
+            <column name="res_mark" />
+        </property>
+    </class>
+</hibernate-mapping>

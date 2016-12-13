@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-13 10:58:39 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="hibernate.User" table="user" catalog="db_15">
+        <id name="userId" type="java.lang.Integer">
+            <column name="user_id" />
+            <generator class="identity" />
+        </id>
+        <property name="userName" type="string">
+            <column name="user_name" length="20" />
+        </property>
+        <property name="userTel" type="string">
+            <column name="user_tel" length="11" />
+        </property>
+        <property name="userPassword" type="string">
+            <column name="user_password" length="20" />
+        </property>
+        <property name="userLevel" type="java.lang.Integer">
+            <column name="user_level" />
+        </property>
+        <property name="userExperience" type="java.lang.Integer">
+            <column name="user_experience" />
+        </property>
+        <property name="userMoney" type="java.lang.Integer">
+            <column name="user_money" />
+        </property>
+        <property name="userCertStatus" type="java.lang.Character">
+            <column name="user_cert_status" length="1" />
+        </property>
+        <property name="userGender" type="java.lang.Character">
+            <column name="user_gender" length="1" />
+        </property>
+        <property name="userBirthYear" type="java.lang.Integer">
+            <column name="user_birth_year" />
+        </property>
+        <property name="userRegTime" type="date">
+            <column name="user_reg_time" length="10" />
+        </property>
+        <property name="userBpCity" type="string">
+            <column name="user_bp_city" length="20" />
+        </property>
+        <property name="userBpProvince" type="string">
+            <column name="user_bp_province" length="20" />
+        </property>
+        <property name="userLpCity" type="string">
+            <column name="user_lp_city" length="20" />
+        </property>
+        <property name="userLpProvince" type="string">
+            <column name="user_lp_province" length="20" />
+        </property>
+        <set name="reports" inverse="true">
+            <key>
+                <column name="rep_user_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.Report" />
+        </set>
+        <set name="resMarks" inverse="true">
+            <key>
+                <column name="marker_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.ResMark" />
+        </set>
+        <set name="artComments" inverse="true">
+            <key>
+                <column name="commentator_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.ArtComment" />
+        </set>
+        <set name="articles" inverse="false" table="art_like">
+            <key>
+                <column name="liker_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="hibernate.Article">
+                <column name="like_art_id" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="restaurants" inverse="false" table="res_collect">
+            <key>
+                <column name="collector_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="hibernate.Restaurant">
+                <column name="cres_id" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="rouTrades" inverse="true">
+            <key>
+                <column name="trade_user_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.RouTrade" />
+        </set>
+        <set name="routes" inverse="true">
+            <key>
+                <column name="rou_user_id" />
+            </key>
+            <one-to-many class="hibernate.Route" />
+        </set>
+        <set name="articles_1" inverse="true">
+            <key>
+                <column name="art_user_id" />
+            </key>
+            <one-to-many class="hibernate.Article" />
+        </set>
+    </class>
+</hibernate-mapping>
